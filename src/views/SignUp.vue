@@ -6,6 +6,19 @@
         <div class="card">
           <div class="card-content">
             <form @submit.prevent="signUp(name, email, password, passwordConfirmation )">
+               <div class="has-text-centered">
+                <img src="@/assets/DefaultPhoto.png" />
+              </div>
+
+              <b-field class="file is-centered">
+                <b-upload v-model="photoToUpload">
+                  <a class="button is-primary">
+                    <b-icon icon="camera" pack="fas" size="is-small"></b-icon>
+                    <span>Adicionar nova foto</span>
+                  </a>
+                </b-upload>
+              </b-field>
+
               <b-field label="Nome">
                 <b-input v-model="name" type="text"></b-input>
               </b-field>
