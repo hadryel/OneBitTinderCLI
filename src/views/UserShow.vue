@@ -47,6 +47,13 @@
           </h5>
         </div>
       </div>
+
+      <div class="column is-12 has-text-centered">
+        <button v-on:click="logout" class="button is-primary logout-button">
+          <b-icon icon="door-open" pack="fas" size="is-small"></b-icon>
+          <span>Deslogar</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +90,10 @@
   h5.description {
     margin-top: 2em;
   }
+
+  .button.is-primary.logout-button{
+    background-color: #333333;
+  }
 </style>
 
 
@@ -92,6 +103,7 @@
   import { mapState } from 'vuex';
   import router from '../router';
   import UserService from '../services/user_service';
+  import AccountService from '../services/account_service';
 
   export default {
     components: {
@@ -140,6 +152,10 @@
 
       backToPreviousPage() {
         router.go(-1);
+      },
+      
+      logout() {
+        AccountService.logout();
       }
     }
   }

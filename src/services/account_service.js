@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '../store';
+import router from '../router';
 
 export default {
   async login(email, password) {
@@ -20,5 +21,10 @@ export default {
     headers['Content-Type'] = 'application/json';
     let response = await axios.patch(`users/${id}`, { user: { name: name, college: college, company: company, description: description } }, { headers: headers })
     return response.data;
+  },
+  async logout(){
+    localStorage.removeItem('account');
+    store.dispatch('Notification/alert', { type: 'success', message: "Logout efetuado com sucesso!" });
+    router.push("/login");
   }
 }
