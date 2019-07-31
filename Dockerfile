@@ -8,11 +8,12 @@ ENV SERVER_PATH /OneBitTinderVueApp
 WORKDIR /app
 
 COPY package.json yarn*.lock ./
-RUN yarn config set no-progress && yarn install
 
 COPY . .
 
-RUN NODE_ENV=production yarn build
+RUN yarn config set no-progress && yarn install
+
+RUN NODE_ENV=production yarn build --mode staging
 
 # estágio de produção
 FROM nginx:stable-alpine as production-stage
