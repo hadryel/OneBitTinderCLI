@@ -6,7 +6,7 @@
         <div class="card">
           <div class="card-content">
             <form @submit.prevent="signUp(name, email, password, passwordConfirmation )">
-               <div class="has-text-centered">
+              <div class="has-text-centered">
                 <img src="@/assets/DefaultPhoto.png" />
               </div>
 

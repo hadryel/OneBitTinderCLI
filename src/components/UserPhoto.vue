@@ -1,14 +1,19 @@
 <template>
   <div>
-    <swiper :options="swiperOptions">
-      <swiperSlide v-for="photo in photos" :key="photo.id">
-        <i class="fas fa-check-square has-text-white default-check" v-if="photo.default"></i>
-        <img :src="photo.url" @click="openMenu(photo)" />
-      </swiperSlide>    
+    <div v-if="photos && photos.length > 0">
+      <swiper :options="swiperOptions">
+        <swiperSlide v-for="photo in photos" :key="photo.id">
+          <i class="fas fa-check-square has-text-white default-check" v-if="photo.default"></i>
+          <img :src="photo.url" @click="openMenu(photo)" />
+        </swiperSlide>    
 
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-    </swiper>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
+    </div>
+    <div v-else>
+      <img src="@/assets/DefaultPhoto.png" />
+    </div>
 
     <b-field class="file is-centered">
       <b-upload v-model="photoToUpload">

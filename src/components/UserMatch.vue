@@ -8,7 +8,8 @@
       </div>
       
       <div class="has-text-centered">
-        <img :src="user.default_photo_url" />
+        <img v-if="user.default_photo_url" :src="user.default_photo_url" />
+        <img v-else src="@/assets/DefaultPhoto.png" />
       </div>
 
       <div class="columns is-mobile is-gapless">

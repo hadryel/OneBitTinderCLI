@@ -1,11 +1,12 @@
 <template>
   <div>
     <div>
-      <swiper>
+      <swiper v-if="currentUser.photos && currentUser.photos.length > 0">
         <swiperSlide v-for="photo in currentUser.photos" :key="photo.url">
           <img :src="photo.url" >
         </swiperSlide>
       </swiper>
+      <img v-else src="@/assets/DefaultPhoto.png" />
 
       <div class="columns is-mobile is-gapless is-centered action-buttons" v-if="isLoggedUser">
         <div class="column is-12">
@@ -48,7 +49,7 @@
         </div>
       </div>
 
-      <div class="column is-12 has-text-centered">
+      <div v-if="$route.name == 'profile'" class="column is-12 has-text-centered">
         <button v-on:click="logout" class="button is-primary logout-button">
           <b-icon icon="door-open" pack="fas" size="is-small"></b-icon>
           <span>Deslogar</span>
