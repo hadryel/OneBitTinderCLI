@@ -5,6 +5,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import SignUp from './views/SignUp';
 import UserShow from './views/UserShow';
+import Chat from './views/Chat';
 import ChatList from './views/ChatList';
 import UserEdit from './views/UserEdit';
 import BlockGeolocation from './views/BlockGeolocation';
@@ -51,6 +52,11 @@ const router = new Router({
       path: '/chats',
       name: 'chats',
       component: ChatList
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: Chat
     },
     {
       path: '/block-geolocation',
