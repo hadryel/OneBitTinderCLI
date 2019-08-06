@@ -5,9 +5,10 @@
         <h1 class="title has-text-centered">Cadastro</h1>
         <div class="card">
           <div class="card-content">
-            <form @submit.prevent="signUp(name, email, password, passwordConfirmation )">
+            <form @submit.prevent="signUp(name, email, password, passwordConfirmation, photoToUpload)">
               <div class="has-text-centered">
-                <img src="@/assets/DefaultPhoto.png" />
+                <img v-if="photoPreviewURL" :src="photoPreviewURL"/>
+                <img v-else src="@/assets/DefaultPhoto.png" />
               </div>
 
               <b-field class="file is-centered">
@@ -61,10 +62,13 @@
 import AccountService from '../services/account_service';
 import router from '../router';
 import store from '../store';
+import PhotoService from '../services/photo_service';
 
 export default {
   data() {
     return {
+      photoToUpload: null,
+      photoPreviewURL: '',
       name: "",
       email: "",
       password: "",
@@ -77,11 +81,21 @@ export default {
     }
   },
 
+  watch: {
+    photoToUpload(newValue) {
+      if(newValue) {
+        this.photoPreviewURL = URL.createObjectURL(newValue);
+      }
+    }
+  },
+
   methods: {
-    signUp(name, email, password, passwordConfirmation) {
-      AccountService.signUp(name, email, password, passwordConfirmation).then(() => {
+    signUp(name, email, password, passwordConfirmation, photoToUpload) {
+      AccountService.signUp(name, email, password, passwordConfirmation).then(response => {
         router.push("/login");
         store.dispatch('Notification/alert', { type: 'success', message: "Cadastro realizado com sucesso" });
+
+        PhotoService.addFirstPhoto(photoToUpload, email, response.authentication_token);
       }, (error) => {
         if(error.response) this.errors = error.response.data.errors;
       });

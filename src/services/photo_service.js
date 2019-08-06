@@ -16,6 +16,15 @@ export default {
     return response.data.photo;
   },
 
+  async addFirstPhoto(file, email, token) {
+    let formData = new FormData();
+    formData.append('photo[file]', file);
+    let headers = { 'X-User-Email': email, 'X-User-Token': token };
+    headers['Content-Type'] = 'multipart/form-data';
+    let response = await axios.post(`photos`, formData, { headers: headers })
+    return response.data.photo;
+  },
+
   async setAsDefault(photo) {
     let headers = store.getters['accountHeaders'];
     headers['Content-Type'] = 'application/json';
