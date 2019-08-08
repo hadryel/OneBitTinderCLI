@@ -91,16 +91,8 @@
 
     data() {
       return {
-        chats: [],
-        matches: [],
-        isMenuActive: false,
-        currentItem: {},
-        swiperOptions: {
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        }
+        newMessage: '',
+        messages: []
       }
     },
 
@@ -110,37 +102,7 @@
     },
 
     methods: {
-      openMenu(item, type) {
-        this.isMenuActive = true;
-        this.currentItem = item;
-        this.currentItem.type = type;
-      },
-
-      closeMenu() {
-        this.isMenuActive = false
-      },
-
-      loadMatches() {
-        MatchService.loadMyMatches().then(matches => {
-          this.matches = matches;
-        })
-      },
-
-      loadChats() {
-        ChatService.load().then(chats => {
-          this.chats = chats;
-        })
-      },
-      unmatch() {
-        MatchService.unmatch(this.currentItem).then(() => {
-          let type = this.currentItem.type
-          let indexToRemove = this[type].indexOf(this.currentItem);
-          this[type].splice(indexToRemove, 1);
-          this.closeMenu();
-        });
-      },
-      
-      startChat() {
+      loadMessages() {
 
       }
     }

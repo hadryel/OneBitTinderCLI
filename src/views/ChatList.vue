@@ -35,11 +35,11 @@
         <div class="card-content">
           <div class="content">
             <div v-if="currentItem.type == 'matches'">
-              <a @click="startChat(currentItem.id)">Iniciar chat</a>
+              <a @click="startChat(currentItem)">Iniciar chat</a>
               <hr />
             </div>
             <div v-if="currentItem.type == 'chats'">
-              <a @click="startChat(currentItem.id)">Ir para Chat</a>
+              <a @click="startChat(currentItem)">Ir para Chat</a>
               <hr />
             </div>
             <a @click="unmatch()">Desfazer Match</a>
@@ -139,8 +139,10 @@
           this.closeMenu();
         });
       },      
-      startChat(userId) {
-
+      startChat(user) {
+        ChatService.loadChat(user.id).then(messages => {
+          
+        })
       }
     }
   }
